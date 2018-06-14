@@ -1,0 +1,118 @@
+# #+TITLE: phdenzel's git cheatsheet
+# #+AUTHOR: Philipp Denzel
+#+OPTIONS: author:nil
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: date:nil
+#+OPTIONS: html-postamble:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css" />
+
+* What's git?
+
+Git is a piece of software which was created by none other than Linus Torvald.
+If this name doesn't ring a bell, say his first name again, but with a 'k' somewhere in between, like "Linux".
+If you don't know what Linux is, nevermind...
+
+Git is what people call a /version control system/.
+It is primarily used to manage source code in software development, allowing to coordinate work on files by multiple coders.
+
+
+* How to install it?
+
+If your system doesn't come with git already preinstalled, you can visit git's official [[https://git-scm.com/downloads][website]].
+
+
+* Five most useful commands in git
+
+If there are only five commands you can memorize, the following are definitely the ones:
+#+BEGIN_SRC bash
+  git init
+  git add
+  git status
+  git commit -m "Cookies are awesome"
+  git push  # and git pull
+#+END_SRC
+
+~git init~ initializes a git repository structure, which comes with so many advantages, I don't even know where to start.
+It can track changes you made within the repository on any files, saves past versions, and if you add a remote it's safely backed up somewhere other than on your computer.
+
+If you create a new file in your git repository, it is not automatically tracked.
+~git add~ allows you to add files in the directory to the git structure.
+
+~git status~ shows you a summary of what in your repository is being tracked, what is not, and which tracked files have been changed.
+
+git doesn't just log changes automatically.
+If you want to set a new checkpoint, you have to commit the changes with ~git commit -m "some message"~.
+The flag ~-m "string argument"~ is very important, particularly if you're working on a project with multiple collaborators, as it describes the reason or content for the commit.
+
+~git push~ or ~git pull~ are commands that only work if a remote has been set up.
+A remote is a copy of the repository with which you sync your own repository, which sits at some remote location, usually a server hosted by GitHub, Bitbucket, Gitlab, etc.
+~git push~ sends an update with possibly several commits to the remote, whereas ~git pull~ syncs the repository with new changes applied to the remote which haven't yet been applied to yours.
+
+
+* Gotta-have-dot(files)
+
+Two dotfiles that are very useful when using git are ~.gitignore~ and ~.gitconfig~!
+
+If you have untracked files in your repository, git will tell you. Usually, e.g. if you compile code, there are many object files you might not want to ever be part of your git structure.
+To exclude those files and avoid being asked every time whether or not you want to add those files to the git structure, add rules to your ~.gitignore~ and place it in your home directory.
+It contains rules for files, which (if they match) tell git to ignore a particular type of file, e.g. put ~.DS_Store~ in your ~.gitignore~ to never worry about those damn (seemingly useless) files ever again; or ~*.o~ to ignore all object files ending with ~.o~.
+
+One thing git tracks when it logs changes in the repository, is /who/ made them.
+
+
+* Use GitHub API
+
+Use the GitHub API and you never have to leave your terminal to add the repository on GitHub in the browser.
+It's just a small thing, but very useful...
+
+
+* Fork from a GitHub repository
+
+If you are working with a GitHub repository which isn't yours, but you still need to be able to push your changes to a repository, you might want to consider forking it.
+On the GitHub repository click on the *Fork* button, and you'll find a fork in your "repo collection".
+However, you still need to configure it to be able to easily work with it.
+To be able to pull from the original repository add an upstream remote with
+#+BEGIN_SRC sh
+  git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+#+END_SRC
+
+You can look at the remotes with
+#+BEGIN_SRC sh
+  git remote -v
+#+END_SRC
+
+Once the remote is added, fetch changes from the forked repository with
+#+BEGIN_SRC sh
+  git fetch upstream
+#+END_SRC
+
+And get the new changes from the original repository (without overwriting your own local changes) with
+#+BEGIN_SRC sh
+  git merge upstream/master
+#+END_SRC
+
+
+* Checkpoint branching
+
+Common scenario is `master` branch should be kept working and not changed until an experiment is completed and fully working. For those purposes create a new branch, called say `dev`...
+#+BEGIN_SRC sh
+  git checkout master
+  git checkout -b dev  # or `git branch dev`
+#+END_SRC
+
+Perform the experiment, and once it is working and ready add, commit, and push it to the `dev` branch on the remote
+
+#+BEGIN_SRC sh
+  git add .
+  git commit -m 'message'
+  git push --set-upstream origin dev  # or `git push -u origin dev`
+#+END_SRC
+
+If you want to add the changes to the `master` branch, do...
+
+#+BEGIN_SRC sh
+  git checkout master
+  git pull origin dev      # or `git merge dev`
+  git push origin master   # or `git push`
+#+END_SRC

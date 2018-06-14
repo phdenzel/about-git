@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-06-13 Wed 17:14 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About git and GitHub</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Philipp Denzel" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">About git and GitHub</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org090b5aa">What is git?</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org4090d52">What is GitHub?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org0596b70">How to install?</a></li>
+<li><a href="#orgd70b13b">Five most important commands you should remember</a></li>
+<li><a href="#orge1b1c45">Gotta-have-dot(files)</a></li>
+<li><a href="#org7600681">Example</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org51b32ed">Undo previous commit</a></li>
+<li><a href="#org96f2b6b">Merge conflicts</a></li>
+<li><a href="#orgc35308a">Checkpoint branching</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org090b5aa" class="outline-2">
+<h2 id="org090b5aa">What is git?</h2>
+<div class="outline-text-2" id="text-org090b5aa">
+<ul class="org-ul">
+<li>created by Linus Torvald (in 2005)</li>
+<li>the origin of the name "git" depends on your mood:
+<ul class="org-ul">
+<li>random three-letter combination that is pronounceable and close to "get"
+(if you're impartial)</li>
+<li>it's actually a word and means:
+<ul class="org-ul">
+<li>stupid</li>
+<li>contemptible and despicable</li>
+<li>simple</li>
+</ul></li>
+<li>"global information tracker" (if you're in a good mood)</li>
+<li>"goddamn idiotic truckload of sh*t" (if your mood is bad)</li>
+</ul></li>
+<li>version control system
+<ul class="org-ul">
+<li>manage source code</li>
+<li>history of changes</li>
+<li>coordinate work with multiple collaborators</li>
+</ul></li>
+<li>for me: combined with GitHub
+<ul class="org-ul">
+<li>backup</li>
+<li>publish project's code</li>
+<li>collaborations</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org4090d52" class="outline-4">
+<h4 id="org4090d52">What is GitHub?</h4>
+<div class="outline-text-4" id="text-org4090d52">
+<p>
+<a href="https://github.com/">GitHub</a> is a web-based filehosting service using git
+</p>
+
+<ul class="org-ul">
+<li>offers all of git's functionality</li>
+<li>adds some own features</li>
+<li>provides a "GUI"-like interface (for <i>terminal-shy individuals</i>)</li>
+<li>currently hosting 28 million open-source repositories (57 million in total)</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0596b70" class="outline-2">
+<h2 id="org0596b70">How to install?</h2>
+<div class="outline-text-2" id="text-org0596b70">
+<ul class="org-ul">
+<li>Linux: (if it doesn't come with the system already preinstalled)
+<ul class="org-ul">
+<li>apt-get/yum package manager</li>
+<li>if you're brave enough: install from source: <a href="https://github.com/git/git">https://github.com/git/git</a></li>
+</ul></li>
+<li>MacOS: preinstalled version is ancient!!!
+<ul class="org-ul">
+<li>homebrew, macports, etc.</li>
+<li>get the installer from  <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></li>
+</ul></li>
+<li>Windows: 
+<ul class="org-ul">
+<li>get the installer from  <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></li>
+<li><a href="win-gitinstall.webm">Install it like this&#x2026;</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgd70b13b" class="outline-2">
+<h2 id="orgd70b13b">Five most important commands you should remember</h2>
+<div class="outline-text-2" id="text-orgd70b13b">
+<div class="org-src-container">
+<pre class="src src-bash">git init
+git add
+git status
+git commit -m <span style="color: #00875F;">"Cookies are awesome"</span>
+git push  <span style="color: #878787;"># </span><span style="color: #878787;">and git pull</span>
+</pre>
+</div>
+
+<p>
+If you don't know/remember what those are try typing <code>man gittutorial</code> or <code>man giteveryday</code> in your terminal!
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge1b1c45" class="outline-2">
+<h2 id="orge1b1c45">Gotta-have-dot(files)</h2>
+<div class="outline-text-2" id="text-orge1b1c45">
+<ul class="org-ul">
+<li><a href="https://raw.githubusercontent.com/phdenzel/dotfiles/master/.gitconfig"><code>.gitconfig</code></a></li>
+<li><a href="https://raw.githubusercontent.com/phdenzel/dotfiles/master/.gitignore"><code>.gitignore</code></a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org7600681" class="outline-2">
+<h2 id="org7600681">Example</h2>
+<div class="outline-text-2" id="text-org7600681">
+<p>
+To understand what git is and why you should use it, it's best to just give it a try.
+So open a terminal window and let's go!
+</p>
+
+<p>
+Initialize a git repository with
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">mkdir gitdemo &amp;&amp; <span style="color: #5FD7FF;">cd</span> gitdemo
+git init
+</pre>
+</div>
+
+<p>
+You'll (probably not) notice that a new directory <code>.git</code> appeared!
+Type <code>ls -a</code> to check&#x2026;
+</p>
+
+<p>
+Let's create a file to start our new project
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">touch index.html
+</pre>
+</div>
+
+<p>
+Write something in it to make it a more realistic test!
+For example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">cat &lt;&lt;EOF &gt; index.html
+<span style="color: #ffa54f;">&lt;!DOCTYPE html&gt;</span>
+
+<span style="color: #ffa54f;">&lt;html&gt;</span>
+<span style="color: #ffa54f;">  &lt;head&gt;</span>
+<span style="color: #ffa54f;">    &lt;title&gt;My awesome baking recipes&lt;/title&gt;</span>
+<span style="color: #ffa54f;">  &lt;/head&gt;</span>
+<span style="color: #ffa54f;">  &lt;body&gt;</span>
+<span style="color: #ffa54f;">    &lt;ul class="cookies"&gt;</span>
+<span style="color: #ffa54f;">      &lt;li&gt;flour&lt;/li&gt;</span>
+<span style="color: #ffa54f;">      &lt;li&gt;eggs&lt;/li&gt;</span>
+<span style="color: #ffa54f;">      &lt;li&gt;butter&lt;/li&gt;</span>
+<span style="color: #ffa54f;">      &lt;li&gt;sugar&lt;/li&gt;</span>
+<span style="color: #ffa54f;">      &lt;li&gt;salt&lt;/li&gt;</span>
+<span style="color: #ffa54f;">      &lt;li&gt;baking soda&lt;/li&gt;</span>
+<span style="color: #ffa54f;">      &lt;li&gt;chocolate&lt;/li&gt;</span>
+<span style="color: #ffa54f;">    &lt;/ul&gt;</span>
+<span style="color: #ffa54f;">  &lt;/body&gt;</span>
+<span style="color: #ffa54f;">&lt;/html&gt;</span>
+<span style="color: #ffa54f;">EOF</span>
+</pre>
+</div>
+
+<p>
+Once we finished our work on the file, let's check the status of our repository&#x2026;
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">git status
+</pre>
+</div>
+
+<p>
+Git will respond with
+</p>
+
+<pre class="example">
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+  index.html
+
+  nothing added to commit but untracked files present (use "git add" to track)
+</pre>
+
+<p>
+It told us that it currently doesn't track changes in our new file <code>index.html</code>.
+It will also propose what to do next with commands in <code>("")</code>.
+So, let's add <code>index.html</code> to our git structure with
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">git add index.html
+</pre>
+</div>
+<p>
+If multiple files were created and you'd want to add all of them at once, simply type <code>git add .</code>.
+</p>
+
+<p>
+Now the status says:
+</p>
+<pre class="example">
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached &lt;file&gt;..." to unstage)
+
+        new file:   index.html
+</pre>
+
+<p>
+Now the file is recognized by git.
+Since we're happy with our file, let's commit its contents with
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">git commit -m <span style="color: #00875F;">"Initial commit"</span>
+</pre>
+</div>
+
+<p>
+Now the status shows
+</p>
+
+<pre class="example">
+On branch master
+nothing to commit, working tree clean
+</pre>
+
+<p>
+From now on, everytime you change <code>index.html</code>, git will recognize those changes and compare to the previously logged (i.e. committed) version.
+To check, change the file contents of <code>index.html</code> somehow and look at the difference with
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sed -i <span style="color: #00875F;">'16i\      &lt;li&gt;water&lt;/li&gt;'</span> index.html
+git diff index.html
+</pre>
+</div>
+
+<p>
+To undo those changes simply type
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">git checkout -- index.html
+</pre>
+</div>
+
+<p>
+Now that we have tried the recipe, eaten the cookies, and are confident that we don't want to change it, we're finally ready to upload our repository.
+To do that we need to create a repository on GitHub.
+This can be done manually (by signing in to GitHub, clicking on the "New repository" button, and following further instructions from GitHub).
+However, we're "browser-lazy", so we'll use GitHub's API to do the same from the terminal.
+Note: if you want to use the following two commands, sign up for an account at GitHub, replace <code>phdenzel</code> with your own GitHub username and <code>gitdemo</code> with your repository's name.
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">curl -u phdenzel https://api.github.com/user/repos -d <span style="color: #00875F;">"{\"name\":\"gitdemo\"}"</span>
+</pre>
+</div>
+
+<p>
+Check on GitHub if the repo was created.
+If so, you might notice that it is still empty.
+To add a <i>remote</i>, an off-site copy of the same repository with which to sync up, go back to the terminal and type:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">git remote add origin git@github.com:phdenzel/gitdemo.git
+git remote -v
+</pre>
+</div>
+
+<p>
+To sync up with your local repository simply type
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">git push -u origin master
+</pre>
+</div>
+
+<p>
+And voila! Your file was uploaded to GitHub.
+You're now able to work on the repository, expand it, etc.
+After you worked on it, don't forget to add+commit your changes with <code>git commit -a -m "Pizza recipe"</code> and push the commits to GitHub with <code>git push</code>.
+</p>
+</div>
+
+<div id="outline-container-org51b32ed" class="outline-4">
+<h4 id="org51b32ed">Undo previous commit</h4>
+<div class="outline-text-4" id="text-org51b32ed">
+<p>
+It often happens that you pushed something accidentally and want to revert to the previous commit.
+This can be achieved with
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">git reset HEAD^ --hard
+git push -f
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org96f2b6b" class="outline-4">
+<h4 id="org96f2b6b">Merge conflicts</h4>
+<div class="outline-text-4" id="text-org96f2b6b">
+<p>
+Sometimes, pulls and pushes give rise to <i>merge conflicts</i>, especially if more than one person works on the same file.
+It happens when two lines have been changed to something else than what is expected from the remote.
+Unfortunately, this isn't automatically solved by git, so you have to fix each conflict by hand.
+Git will mark the lines with <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; BRANCH-NAME</code>, and divide them with <code>=======</code>.
+Just decide which version you like better and delete the rest, add+commit, and then push.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgc35308a" class="outline-4">
+<h4 id="orgc35308a">Checkpoint branching</h4>
+<div class="outline-text-4" id="text-orgc35308a">
+<p>
+Another thing I find useful, is what I call <i>checkpoint branching</i>.
+Sometimes your project is in perfect shape, and you don't want to mess it up by changing something.
+The solution is to move to a different <i>branch</i> and copy everything over.
+</p>
+
+<p>
+Look at all current branches with
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">git branch -a
+</pre>
+</div>
+
+
+<p>
+Now check that you are on the <code>master</code> branch, branch off to a new one, and 
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">git checkout master
+git branch dev
+</pre>
+</div>
+
+<p>
+Perform your experiment on the <code>dev</code> branch, where you don't hurt the <code>master</code> branch.
+Then add+commit, and push the entire branch to the remote
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">git add .
+git commit -a -m <span style="color: #00875F;">"Highly experimental"</span>
+git push -u origin dev
+</pre>
+</div>
+
+<p>
+Once you're finished and want to move everything to <code>master</code>, merge them with
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">git checkout master
+git pull origin dev
+git push origin master
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Philipp Denzel</p>
+<p class="date">Created: 2018-06-13 Wed 17:14</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
